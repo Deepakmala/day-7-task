@@ -1,0 +1,84 @@
+
+Day 07:ARRAY METHODS
+
+
+Solving problems using array functions on the rest countries' data (https://restcountries.com/v3.1/all).
+a. Get all the countries from the Asia continent /region using the Filter function
+b. Get all the countries with a population of less than 2 lakhs using Filter function
+c. Print the following details name, capital, flag using forEach function
+d. Print the total population of countries using reduce function
+e. Print the country which uses US Dollars as currency.
+
+
+
+
+ANSWERS:
+
+
+a. fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(countries => {
+    const asianCountries = countries.filter(country => country.region === 'Asia');
+    console.log(asianCountries);
+  })
+  .catch(error => console.error(error));
+
+
+
+
+
+b. fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(countries => {
+    const smallPopulationCountries = countries.filter(country => country.population < 200000);
+    console.log(smallPopulationCountries);
+  })
+  .catch(error => console.error(error));
+
+
+
+
+
+
+
+c. fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(countries => {
+    countries.forEach(country => {
+      console.log(`Name: ${country.name}`);
+      console.log(`Capital: ${country.capital}`);
+      console.log(`Flag: ${country.flag}`);
+      console.log('---');
+    });
+  })
+  .catch(error => console.error(error));
+
+
+
+
+
+d. fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(countries => {
+    const totalPopulation = countries.reduce((acc, country) => acc + country.population, 0);
+    console.log(totalPopulation);
+  })
+  .catch(error => console.error(error));
+
+
+
+
+
+
+e. fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(countries => {
+    const usdCountry = countries.find(country => country.currencies.some(currency => currency.code === 'USD'));
+    if (usdCountry) {
+      console.log(usdCountry);
+    } else {
+      console.log('No country was found that uses the US dollar as currency.');
+    }
+  })
+  .catch(error => console.error(error));
+
